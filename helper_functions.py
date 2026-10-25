@@ -19,7 +19,10 @@ def jukes_cantor(reference_sequence: str, distant_sequence: str) -> float:
         For example 1.163.
 
     """
-    raise NotImplementedError()
+    jc = 0.00
+    # Calculate Hamming distance
+    hamming_distance = sum(1 for a, b in zip(reference_sequence, distant_sequence) if a != b)
+    return jc
 
 
 def kimura_two_parameter(reference_sequence: str, distant_sequence: str) -> float:
