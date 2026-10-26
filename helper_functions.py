@@ -1,3 +1,6 @@
+import math
+
+
 def jukes_cantor(reference_sequence: str, distant_sequence: str) -> float:
     """The Jukes-Cantor correction for estimating genetic distances
     calculated with Hamming distance.
@@ -21,7 +24,12 @@ def jukes_cantor(reference_sequence: str, distant_sequence: str) -> float:
     """
     jc = 0.00
     # Calculate Hamming distance
-    hamming_distance = sum(1 for a, b in zip(reference_sequence, distant_sequence) if a != b)
+    hamming_dist = sum(1 for a, b in zip(reference_sequence, distant_sequence) if a != b)
+    # jc_dist = (-3/4)ln[1-p*(4/3)]
+    p = hamming_dist / len(reference_sequence)
+    if p >= 0.75:
+        raise ValueError("Hamming distance too high for Jukes-Cantor correction")
+    jc = -3/4 * math.log(1 - p * 4/3)
     return jc
 
 
